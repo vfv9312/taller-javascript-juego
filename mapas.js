@@ -7,6 +7,7 @@ const emojis = {
     FUEGO: "🔥",
     FIN: "🪦",
     WIN: "🏆",
+    CORAZON : "❤️‍🔥",
   };
   const maps = [];
   maps.push(`

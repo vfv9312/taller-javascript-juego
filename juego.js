@@ -4,6 +4,7 @@ const btnUp =document.querySelector("#up");
 const btnLeft = document.querySelector("#left");
 const btnRight =document.querySelector("#right");
 const btnDown = document.querySelector("#down");
+const vidasHtml = document.querySelector('#Vidas')
 
 window.addEventListener('load', mantenerTamaño);// al cargar la pagina entra a la funcion comienzaJuego
 window.addEventListener('resize', mantenerTamaño);// cuando se cambie de tamaño la pantalla del navegador entra la funcion
@@ -90,6 +91,7 @@ console.log(FilasColumnas);// podemos ver que creamos un arreglo bidimensional
      juego.textAlign = 'end';
       posicionEnemigo = [];
      juego.clearRect(0,0, TamanoCanvas, TamanoCanvas);
+     muestaVidas()
     FilasColumnas.forEach((fila, filaIndice) => { fila.forEach((columna, columnaIndice) => { // forech de FilasColumnas fila tendra el valor que tiene al recorrer filaIndice tendra el valor del indice que esta recorriendo
       const emoji = emojis[columna];//emoji obtiene el valor que tiene el caracter que esete en la columna
       const PosX = elementoTamaño * (columnaIndice +1);// PosX tiene el calculo para saber la posicion del caracter
@@ -197,31 +199,42 @@ function moverJugador (){
   });
   
   if (ColisionEnemiga) {//si es true entra
-    juego.fillText(emojis['FUEGO'], posicionJugador.x, posicionJugador.y);
-    lvlFallido();
+    juego.fillText(emojis['FUEGO'], posicionJugador.x, posicionJugador.y);// ledamos el efecto que se quema el personaje
+    lvlFallido(); // entramos a la funcion
   }
 }
 
 function lvlFallido() {
-  posicionJugador.x = undefined;
+  posicionJugador.x = undefined;// reseteamos los valores para puedan que en la funcion comienzaJuego piense que ingrese a la condicional que le da la posicion de la puerta
   posicionJugador.y = undefined;
-  vidas--;
-  if (vidas === 0) {
-    lvl = 0;
-    vidas = 3;
-    comienzaJuego();
+  vidas--; //restamos una vida que perdio
+  if (vidas === 0) {//si pierde las vidas y llega a 0 entra
+    lvl = 0; //reseteamos el mapa y lo colocamos en el mapa 0
+    vidas = 3;//reseteamos las vidas y le volvemos a dar las 3 vidas
+    comienzaJuego(); //que ingrese a comienzaJuego
   }
-  //comienzaJuego();
+  //comienzaJuego();//no le damos que comiezaJuego para que de tiempo en que se vea el personaje quemandose
 }
 
-function Triunfo() {
-  lvl += 1;
-  if (lvl == 5) {
-   finvictoria();
-  return;  }
+function Triunfo() {//si ganamos
+  lvl += 1;//aumenta uno el lvl haciento que entre el siguiente objeto en el arreglo de mapas
+  if (lvl == 5) { //si llega al maximo de mapas entra
+   finvictoria();//abrimos la funcion
+   return; 
+ }
   comienzaJuego();
 }
 
 function finvictoria() {
-  alert ('Te la mamaste padrino' + emojis['WIN']);
+  alert ('Te la mamaste padrino' + emojis['WIN']);//un msj que ya ganamos
+}
+
+function muestaVidas() {
+//const ArregloVidas = Array(vidas).fill(emojis['CORAZON'])// loque hace Array() es crear un arreglo con los espacio que le indiquemos
+//console.log(ArregloVidas);// y se imprime los 3 corazones, sin embargo hay otra solucion
+
+vidasHtml.innerHTML = emojis['CORAZON'].repeat(vidas);// El método repeat() construye y devuelve una nueva cadena que contiene el número especificado de copias de la cadena en la cual fue llamada, concatenados.
+
+
+  
 }
