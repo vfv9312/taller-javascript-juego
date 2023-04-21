@@ -6,7 +6,9 @@ const btnRight =document.querySelector("#right");
 const btnDown = document.querySelector("#down");
 const vidasHtml = document.querySelector('#Vidas')
 const Tiempo = document.getElementById("Tiempo");
+const reset_button = document.querySelector('#reset_button');
 
+reset_button.addEventListener('click', resetGame);
 window.addEventListener('load', mantenerTamaño);// al cargar la pagina entra a la funcion comienzaJuego
 window.addEventListener('resize', mantenerTamaño);// cuando se cambie de tamaño la pantalla del navegador entra la funcion
 let TamanoCanvas; //declaramos una variable vacia
@@ -96,7 +98,7 @@ function comienzaJuego() {
 //El método .split() se utiliza para dividir una cadena de texto en un array de elementos separados por un delimitador específico. Por ejemplo, si tenemos la cadena de texto “Hola, mundo”, podemos dividirla en un array utilizando la coma como delimitador
 const FilasColumnas = depurarArreglo.map(fila => fila.trim().split('')); //FilasColumnas se convertira en un arreglo el trim quitara espacios y el
 //En JavaScript, el método .map() se utiliza para crear un nuevo arreglo aplicando una función a cada elemento de un arreglo existente. La sintaxis del método .map() 
-console.log(FilasColumnas);// podemos ver que creamos un arreglo bidimensional
+console.log(FilasColumnas[0].length);// podemos ver que creamos un arreglo bidimensional
     juego.font = elementoTamaño +'px Verdana' // modificamos el tamaño del emoji detodos modos como es texto tenemos que poner la tipografia de todos modos
      juego.textAlign = 'end';
       posicionEnemigo = [];
@@ -265,4 +267,8 @@ vidasHtml.innerHTML = emojis['CORAZON'].repeat(vidas);// El método repeat() con
 
 function muestraTiempo() {
   Tiempo.innerHTML = Math.trunc((Date.now() - tiempoComienzo)/1000);
+}
+
+function resetGame() {
+  location.reload();
 }
