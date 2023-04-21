@@ -1,0 +1,73 @@
+:root{
+    --amarillo : #fdef05;
+    --blanco : #fff;
+    --negro-normal:#201E1C;
+    --dorado: #b27633;
+    --rojo: #772e39;
+    --violeta: blueviolet;
+    --hospital-green:#ACD9B2;
+    --dorado-claro:#b09c5c;
+}
+
+h1{
+    text-align: center;
+}
+
+body {
+    background-color: var(--rojo);
+    color: var(--blanco);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.game-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+}
+
+canvas {
+    border: 4px solid var(--dorado);
+    border-radius: 8px;
+    background-color: var(--dorado-claro);
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+}
+
+button {
+    background-color: var(--violeta);
+    border-radius: 8px;
+    border-color: var(--dorado);
+    font-family: inherit;
+    margin: 0;
+    padding: 5px 20px;
+    width: 100px;
+}
+
+button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.messages {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 460px;
+}
+
+p {
+    display: block;
+    margin: 0;
+    width: 100%;
+}

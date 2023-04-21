@@ -1,0 +1,9 @@
+button {
+    margin-top: 25px;
+}
+
+#up,
+#down {
+    margin-left: 100%;
+    margin-right: 100%;
+}
