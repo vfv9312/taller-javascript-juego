@@ -151,8 +151,8 @@ console.warn('te saliste del mapa');
 }
 
 function moveLeft() {
-if ((posicionJugador.x - elementoTamaño)< elementoTamaño) {
-  console.log('izquierda');
+if ((posicionJugador.x - elementoTamaño)<= 0) {
+  console.log(posicionJugador.x - elementoTamaño);
 }
 else{
   posicionJugador.x -= elementoTamaño; 
@@ -161,8 +161,8 @@ else{
 }
 
 function moveRight() {
-if ((posicionJugador.x + elementoTamaño)>659) {
-  console.log('derecha');
+if ((posicionJugador.x + elementoTamaño) >= (TamanoCanvas + 20)) {
+  console.log(TamanoCanvas);
 }
 else{
   posicionJugador.x += elementoTamaño; 
@@ -172,7 +172,7 @@ else{
 }
 
 function moveDown() {
-if ((posicionJugador.y  + elementoTamaño)>659) {
+if ((posicionJugador.y  + elementoTamaño)> TamanoCanvas) {
   console.log('abajo');
 }
 else{
@@ -203,10 +203,11 @@ function moverJugador (){
 function Triunfo() {
   lvl += 1;
   if (lvl == 5) {
-    alert ('Te la mamaste padrino' + emojis['WIN']);
-  }
+   finvictoria();
+  return;  }
+  comienzaJuego();
 }
 
-function Muerte() {
-
+function finvictoria() {
+  alert ('Te la mamaste padrino' + emojis['WIN']);
 }
