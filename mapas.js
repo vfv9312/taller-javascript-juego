@@ -8,8 +8,22 @@ const emojis = {
     FIN: "🪦",
     WIN: "🏆",
     CORAZON : "❤️‍🔥",
-  };
+    Z : '🏯',
+    U :'👸🏾',
+      };
   const maps = [];
+  maps.push(`
+  ---------O
+  X--------
+  ----------
+  ----------
+  --------XX
+  X-------XX
+  X--------X
+  --------XX
+  --------XX
+  Z--XXXXXXXX
+  `);
   maps.push(`
     IXXXXXXXXX
     -XXXXXXXXX
@@ -59,7 +73,7 @@ const emojis = {
   I-------XX
 `);
 maps.push(`
-XXXXXXX--I
+XXXXXXX--U
 XXX---X-XX
 XXX-X---XX
 XXX-XXXXXX
@@ -70,5 +84,6 @@ X-XXXXXXXX
 -XXXXXX-XX
 OXXXXXXXXXX
 `);
+
 
   

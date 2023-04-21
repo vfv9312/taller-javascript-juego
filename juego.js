@@ -5,6 +5,7 @@ const btnLeft = document.querySelector("#left");
 const btnRight =document.querySelector("#right");
 const btnDown = document.querySelector("#down");
 const vidasHtml = document.querySelector('#Vidas')
+const Tiempo = document.getElementById("Tiempo");
 
 window.addEventListener('load', mantenerTamaño);// al cargar la pagina entra a la funcion comienzaJuego
 window.addEventListener('resize', mantenerTamaño);// cuando se cambie de tamaño la pantalla del navegador entra la funcion
@@ -27,6 +28,8 @@ const posicionTriunfo = {
 let lvl = 0;
 let posicionEnemigo =[]; // nota diferencia de const y let es el = en const si usamos = para daler algun valor marcara error sin embargo se puede empujar objetos  y en let no ahi problema
 let vidas= 3;
+let tiempoComienzo ;
+let intervaloTiempo;
 
 window.addEventListener("keydown", (movertecla) => { //FUNCION SIN NOMBRE
   let tecla = movertecla.key; //LE DAMOS EL VALER DE LA TECLA PRESIONADA
@@ -78,6 +81,13 @@ function mantenerTamaño() {
 
 function comienzaJuego() {
 
+
+  if (!tiempoComienzo) {
+    tiempoComienzo = Date.now();//mostramos en milisegundos la hora actual del dia
+    intervaloTiempo = setInterval(muestraTiempo ,100); // setInterval nos indica que despues de 100 milisegundos entra a la funcion
+   // muestraTiempo();
+  }
+
  
     //console.log({TamanoCanvas , elementoTamaño});
 
@@ -103,7 +113,7 @@ console.log(FilasColumnas);// podemos ver que creamos un arreglo bidimensional
           posicionJugador.y = PosY; 
         }
       }
-      else if (columna == 'I') {//si la I conside mientras da vuelta el forech entra y guardamos su posision de la meta
+      else if (columna == 'I' || columna == 'Z' || columna == 'U') {//si la I conside mientras da vuelta el forech entra y guardamos su posision de la meta
         posicionTriunfo.x = PosX;
         posicionTriunfo.y = PosY;
       }
@@ -211,6 +221,7 @@ function lvlFallido() {
   if (vidas === 0) {//si pierde las vidas y llega a 0 entra
     lvl = 0; //reseteamos el mapa y lo colocamos en el mapa 0
     vidas = 3;//reseteamos las vidas y le volvemos a dar las 3 vidas
+    tiempoComienzo = 0;
     comienzaJuego(); //que ingrese a comienzaJuego
   }
   //comienzaJuego();//no le damos que comiezaJuego para que de tiempo en que se vea el personaje quemandose
@@ -218,7 +229,7 @@ function lvlFallido() {
 
 function Triunfo() {//si ganamos
   lvl += 1;//aumenta uno el lvl haciento que entre el siguiente objeto en el arreglo de mapas
-  if (lvl == 5) { //si llega al maximo de mapas entra
+  if (lvl == maps.length) { //si llega al maximo de mapas entra
    finvictoria();//abrimos la funcion
    return; 
  }
@@ -226,7 +237,23 @@ function Triunfo() {//si ganamos
 }
 
 function finvictoria() {
-  alert ('Te la mamaste padrino' + emojis['WIN']);//un msj que ya ganamos
+  const recordando = localStorage.getItem('recuerdame')
+  if (recordando) {
+    const tiempoJugador = Math.trunc((Date.now() - tiempoComienzo)/1000);
+    if (recordando >= tiempoJugador) {
+      const record = localStorage.setItem('recuerdame', Math.trunc((Date.now() - tiempoComienzo)/1000));  
+      alert ('Te la mamaste padrino' + emojis['WIN'] + ' imponiendo record : ' + tiempoJugador);//un msj que ya ganamos
+    }
+    else {
+    alert ('Te la mamaste padrino' + emojis['WIN'] + ' pero no has superado el record de: ' + recordando);//un msj que ya ganamos
+    }
+  }
+  else{
+    const record = localStorage.setItem('recuerdame', Math.trunc((Date.now() - tiempoComienzo)/1000));  
+    alert ('Te la mamaste padrino' + emojis['WIN']);//un msj que ya ganamos
+  }
+  
+  clearInterval(intervaloTiempo)
 }
 
 function muestaVidas() {
@@ -234,7 +261,8 @@ function muestaVidas() {
 //console.log(ArregloVidas);// y se imprime los 3 corazones, sin embargo hay otra solucion
 
 vidasHtml.innerHTML = emojis['CORAZON'].repeat(vidas);// El método repeat() construye y devuelve una nueva cadena que contiene el número especificado de copias de la cadena en la cual fue llamada, concatenados.
+}
 
-
-  
+function muestraTiempo() {
+  Tiempo.innerHTML = Math.trunc((Date.now() - tiempoComienzo)/1000);
 }
