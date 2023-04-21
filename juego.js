@@ -24,11 +24,7 @@ const posicionTriunfo = {
   y: undefined,
 }
 let lvl = 0;
-
-const posicionEnemigo ={
-  x:undefined,
-  y:undefined,
-}
+let posicionEnemigo =[]; // nota diferencia de const y let es el = en const si usamos = para daler algun valor marcara error sin embargo se puede empujar objetos  y en let no ahi problema
 
 window.addEventListener("keydown", (movertecla) => { //FUNCION SIN NOMBRE
   let tecla = movertecla.key; //LE DAMOS EL VALER DE LA TECLA PRESIONADA
@@ -91,7 +87,7 @@ const FilasColumnas = depurarArreglo.map(fila => fila.trim().split('')); //Filas
 console.log(FilasColumnas);// podemos ver que creamos un arreglo bidimensional
     juego.font = elementoTamaño +'px Verdana' // modificamos el tamaño del emoji detodos modos como es texto tenemos que poner la tipografia de todos modos
      juego.textAlign = 'end';
-
+      posicionEnemigo = [];
      juego.clearRect(0,0, TamanoCanvas, TamanoCanvas);
     FilasColumnas.forEach((fila, filaIndice) => { fila.forEach((columna, columnaIndice) => { // forech de FilasColumnas fila tendra el valor que tiene al recorrer filaIndice tendra el valor del indice que esta recorriendo
       const emoji = emojis[columna];//emoji obtiene el valor que tiene el caracter que esete en la columna
@@ -104,13 +100,20 @@ console.log(FilasColumnas);// podemos ver que creamos un arreglo bidimensional
           posicionJugador.y = PosY; 
         }
       }
-      if (columna == 'I') {
+      else if (columna == 'I') {//si la I conside mientras da vuelta el forech entra y guardamos su posision de la meta
         posicionTriunfo.x = PosX;
         posicionTriunfo.y = PosY;
+      }
+      else if (columna == 'X') {// si encuentra X mientras da vuelta el forech entra y empujamos la posicion con 2 decimales maximo al arreglo
+          posicionEnemigo.push({
+            x: PosX.toFixed(2),
+            y: PosY.toFixed(2),
+          });
       }
 
     });
      });
+     console.log(posicionEnemigo);
      juego.fillText(emojis['PLAYER'], posicionJugador.x, posicionJugador.y);
 
 
@@ -186,13 +189,24 @@ function moverJugador (){
   if (posicionTriunfo.x.toFixed(2) == posicionJugador.x.toFixed(2) && posicionTriunfo.y.toFixed(2) == posicionJugador.y.toFixed(2)) {// .toFixed(x) hace que agarre la cantidad de decimales que le indiquemos en este caso solo 2 esto para que no tengamos error que por una decimal ultra larga no conincida
     Triunfo();
   }
+  const ColisionEnemiga = posicionEnemigo.find(enemigo => {
+    const ColisionEnemigaX = enemigo.x == posicionJugador.x.toFixed(2);
+    const ColisionEnemigaY = enemigo.y == posicionJugador.y.toFixed(2);
+    return ColisionEnemigaX && ColisionEnemigaY;//retornamos si ambos son true
+  });
+  
+  if (ColisionEnemiga) {//si es true entra
+    juego.fillText(emojis['FUEGO'], posicionJugador.x, posicionJugador.y);
+  }
 }
 
 function Triunfo() {
-  console.log(emojis['WIN']);
   lvl += 1;
   if (lvl == 5) {
     alert ('Te la mamaste padrino' + emojis['WIN']);
-    
   }
+}
+
+function Muerte() {
+
 }

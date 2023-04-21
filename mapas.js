@@ -4,8 +4,8 @@ const emojis = {
     X: "👹",
     I: "⚔️",
     PLAYER: "🥷🏾",
-    BOMB_COLLISION: "🔥",
-    GAME_OVER: "🪦",
+    FUEGO: "🔥",
+    FIN: "🪦",
     WIN: "🏆",
   };
   const maps = [];
