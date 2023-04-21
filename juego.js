@@ -25,6 +25,7 @@ const posicionTriunfo = {
 }
 let lvl = 0;
 let posicionEnemigo =[]; // nota diferencia de const y let es el = en const si usamos = para daler algun valor marcara error sin embargo se puede empujar objetos  y en let no ahi problema
+let vidas= 3;
 
 window.addEventListener("keydown", (movertecla) => { //FUNCION SIN NOMBRE
   let tecla = movertecla.key; //LE DAMOS EL VALER DE LA TECLA PRESIONADA
@@ -197,7 +198,20 @@ function moverJugador (){
   
   if (ColisionEnemiga) {//si es true entra
     juego.fillText(emojis['FUEGO'], posicionJugador.x, posicionJugador.y);
+    lvlFallido();
   }
+}
+
+function lvlFallido() {
+  posicionJugador.x = undefined;
+  posicionJugador.y = undefined;
+  vidas--;
+  if (vidas === 0) {
+    lvl = 0;
+    vidas = 3;
+    comienzaJuego();
+  }
+  //comienzaJuego();
 }
 
 function Triunfo() {
