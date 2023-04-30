@@ -252,7 +252,7 @@ function finvictoria() {
   }
   else{
     const record = localStorage.setItem('recuerdame', Math.trunc((Date.now() - tiempoComienzo)/1000));  
-    alert ('Te la mamaste padrino' + emojis['WIN']);//un msj que ya ganamos
+    alert ('Salvamos a la princesa YURI' + emojis['WIN']);//un msj que ya ganamos
   }
   
   clearInterval(intervaloTiempo)
