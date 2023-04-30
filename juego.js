@@ -244,10 +244,10 @@ function finvictoria() {
     const tiempoJugador = Math.trunc((Date.now() - tiempoComienzo)/1000);
     if (recordando >= tiempoJugador) {
       const record = localStorage.setItem('recuerdame', Math.trunc((Date.now() - tiempoComienzo)/1000));  
-      alert ('Te la mamaste padrino' + emojis['WIN'] + ' imponiendo record : ' + tiempoJugador);//un msj que ya ganamos
+      alert ('Salvamos a la princesa YURI' + emojis['WIN'] + ' imponiendo record : ' + tiempoJugador);//un msj que ya ganamos
     }
     else {
-    alert ('Te la mamaste padrino' + emojis['WIN'] + ' pero no has superado el record de: ' + recordando);//un msj que ya ganamos
+    alert ('Salvamos a la princesa YURI' + emojis['WIN'] + ' pero no has superado el record de: ' + recordando);//un msj que ya ganamos
     }
   }
   else{
